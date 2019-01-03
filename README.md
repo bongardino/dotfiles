@@ -1,3 +1,7 @@
+TODO :
+- [ ] Move repo out of home dir to src
+- [ ] come up w a more clever alias name
+- [ ] build into warm welcome
 
 [Source](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/ "Permalink to The best way to store your dotfiles: A bare Git repository")
 
