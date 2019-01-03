@@ -98,7 +98,7 @@ Again as a shortcut not to have to remember all these steps on any new machine y
 For completeness this is what I ended up with (tested on many freshly minted [Alpine Linux][9] containers to test it out):
     
     
-    git clone --bare https://bitbucket.org/durdn/cfg.git $HOME/.dots
+    git clone --bare https://github.com/bongardino/dotfiles.git $HOME/.dots
     function dots2git {
        /usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME $@
     }
@@ -115,7 +115,5 @@ For completeness this is what I ended up with (tested on many freshly minted [Al
 
 ## Wrapping up
 
-### My gitignore file is EXPLICIT to avoid terrible mistakes - make sure to add new files to the whitelist
-
-I hope you find this technique useful to track your configuration. If you're curious, [my dotfiles live here][10].
+## My gitignore file is EXPLICIT to avoid terrible mistakes - make sure to add new files to the whitelist
 
