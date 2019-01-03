@@ -22,5 +22,4 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 alias dot_sync="sh ~/src/dotfiles/scripts/dot_sync.sh"
 
 #
-# alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias dots2git='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
