@@ -1,4 +1,6 @@
 *
+# explicitly allow these
+!.aliases
 !.bash_profile
 !.bash_prompt
 !.bashrc
