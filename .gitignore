@@ -1,0 +1,12 @@
+*
+!.bash_profile
+!.bash_prompt
+!.bashrc
+!.exports
+!.functions
+!.gitconfig
+!.gitignore
+!.gitignore_global
+!.hushlogin
+!.lesshst
+!.vimrc
