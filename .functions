@@ -34,3 +34,15 @@ function privnote() {
   echo "$note_link" | pbcopy
   echo "note URL is $note_link"
 }
+
+# list aws profile names bc I always forget them.
+# like all the time
+aws-names() {
+  cat ~/.aws/credentials | while read line
+  do
+    if [[ $line == *"["* ]]
+    then
+      echo $line;
+    fi
+  done
+}
