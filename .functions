@@ -37,10 +37,10 @@ function privnote() {
 
 # list aws profile names bc I always forget them.
 # like all the time
-aws-names() {
+awsconfigs() {
   cat ~/.aws/credentials | while read line
   do
-    if [[ $line == *"["* ]]
+    if [[ $line == *"["*"]"* ]]
     then
       echo $line;
     fi
