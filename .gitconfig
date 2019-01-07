@@ -2,5 +2,5 @@
 	email = bongardino@gmail.com
 	name = Bongardino
 [core]
-	excludesfile = /Users/bongardino/.gitignore_global
-	hooksPath = /Users/bongardino/.git-templates/hooks
+	excludesfile = ~/.gitignore_global
+	hooksPath = ~/.git-templates/hooks

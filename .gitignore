@@ -1,8 +1,10 @@
 *
+# explicitly allow these
 !.aliases
 !.bash_profile
 !.bash_prompt
 !.bashrc
+!.bashrc.local
 !.exports
 !.functions
 !.gitconfig
