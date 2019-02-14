@@ -24,11 +24,6 @@ If you haven't been tracking your configurations in a Git repository before, you
 * We set a flag - local to the repository - to hide files we are not explicitly tracking yet. This is so that when you type `config status` and other commands later, files you are not interested in tracking will not show up as `untracked`.
 * Also you can add the alias definition by hand to your `.bashrc` or use the the fourth line provided for convenience.
 
-I packaged the above lines into a [snippet][6] up on Bitbucket and linked it from a short-url. So that you can set things up with:
-    
-    
-    curl -Lks http://bit.do/cfg-init | /bin/bash
-
 After you've executed the setup any file within the `$HOME` folder can be versioned with normal commands, replacing `git` with your newly created `config` alias, like:
     
     
