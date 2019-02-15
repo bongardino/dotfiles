@@ -49,7 +49,7 @@ If you already store your configuration/dotfiles in a Git repo, on a new system 
 
 * Now clone your dotfiles into a bare repo in a _"dot"_ folder of your `$HOME`:
     
-        git clone --bare  "$HOME"/src/dotfiles
+        git clone --bare git@github.com:bongardino/dotfiles.git "$HOME"/src/dotfiles
 
 * Define the alias in the current shell scope:
     
