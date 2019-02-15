@@ -18,5 +18,5 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-#
-alias dots2git='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+# dot setup / git syncing
+alias dot_git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
