@@ -112,7 +112,7 @@ if [ $? = 0 ]; then
   echo "Checked out dots.";
   else
     echo "Backing up pre-existing dot files.";
-    dots2git checkout 2>&1 | egrep "[.]+[a-z]" | awk {'print $1'} | xargs -I{} mv {} "$HOME"/Desktop/config-backup/
+    dot_git checkout 2>&1 | egrep "[.]+[a-z]" | awk {'print $1'} | xargs -I{} mv {} "$HOME"/Desktop/config-backup/
 fi;
 
 dot_git checkout
