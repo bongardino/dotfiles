@@ -95,7 +95,7 @@ For completeness this is what I ended up with for OS X
     
     git clone --bare https://github.com/bongardino/dotfiles.git "$HOME"/src/dotfiles
     function dot_git {
-       /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree=$HOME $@
+       /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree="$HOME" $@
     }
     mkdir -p /Desktop/config-backup
     dot_git checkout
