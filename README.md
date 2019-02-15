@@ -92,21 +92,32 @@ This is because your `$HOME` folder might already have some stock configuration 
 
 For completeness this is what I ended up with for OS X
     
-    
-    git clone --bare https://github.com/bongardino/dotfiles.git "$HOME"/src/dotfiles
-    function dot_git {
-       /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree="$HOME" $@
-    }
-    mkdir -p /Desktop/config-backup
-    dot_git checkout
-    if [ $? = 0 ]; then
-      echo "Checked out dots.";
-      else
-        echo "Backing up pre-existing dot files.";
-        dots2git checkout 2>&1 | egrep "[.]+[a-z]" | awk {'print $1'} | xargs -I{} mv {} "$HOME"/Desktop/config-backup/
-    fi;
-    dot_git checkout
-    dot_git config status.showUntrackedFiles no
+```
+#!/bin/bash
+# this is terrible and not safe dont use it I was up late
+
+git clone --bare https://github.com/bongardino/dotfiles.git "$HOME"/src/dotfiles
+
+function dot_git {
+   /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree="$HOME" $@
+}
+
+if [ ! -d "$DIRECTORY" ]; then
+	mkdir -p "$HOME"/Desktop/config-backup
+fi
+
+dot_git checkout
+
+if [ $? = 0 ]; then
+  echo "Checked out dots.";
+  else
+    echo "Backing up pre-existing dot files.";
+    dots2git checkout 2>&1 | egrep "[.]+[a-z]" | awk {'print $1'} | xargs -I{} mv {} "$HOME"/Desktop/config-backup/
+fi;
+
+dot_git checkout
+dot_git config status.showUntrackedFiles no
+```
 
 ## My gitignore file is EXPLICIT to avoid terrible mistakes - make sure to add new files to the whitelist
 
