@@ -4,3 +4,5 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	hooksPath = ~/.git-templates/hooks
+[init]
+	templatedir = /Users/bongardino/.git-templates

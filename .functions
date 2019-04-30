@@ -14,6 +14,15 @@ function unidecode() {
   fi
 }
 
+function retry()
+{
+    let backoff=1
+    false
+    while [[ $? -ne 0 && $? -ne 130 ]]; do
+        "$@" || (sleep $((backoff*=2));false)
+    done
+}
+
 # privnote cli
 function privnote() {
   echo "input semi secret"
@@ -35,14 +44,25 @@ function privnote() {
   echo "note URL is $note_link"
 }
 
-# list aws profile names bc I always forget them.
-# like all the time
-awsconfigs() {
-  cat ~/.aws/credentials | while read line
-  do
-    if [[ $line == *"["*"]"* ]]
-    then
-      echo $line;
-    fi
-  done
+# set iterm window title
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
+aws-profile() {
+  local profiles=($(cat ~/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort))
+
+  if [ -z "$1" ];  then
+      echo "Pass profile name as an argument. Mayhaps one of these?"
+      echo
+      printf '%s\n' "${profiles[@]}"
+  elif [[ ! " ${profiles[@]} " =~ " ${1} " ]]; then
+      echo "No such profile in ~/.aws/profile. Mayhaps one of these?"
+      echo
+      printf '%s\n' "${profiles[@]}"
+  else
+    title "AWS PROFILE : $@"
+    export AWS_PROFILE="$1"
+    echo AWS Profile set to "$1"
+  fi
 }

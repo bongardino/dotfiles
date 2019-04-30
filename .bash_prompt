@@ -60,6 +60,14 @@ __powerline() {
         printf " $ref$marks"
     }
 
+    # __aws_profile() { 
+    #     # get aws profile
+    #     local profile=$(env | grep AWS_PROFILE | sed -n 's/^AWS_PROFILE=//p')
+
+    #     if [ ! -z "$profile" ]; then
+    #         local aws_profile=
+    # }
+
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
