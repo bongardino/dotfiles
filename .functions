@@ -27,39 +27,39 @@ function retry()
 function privnote() {
   echo "input semi secret"
   read -r input
-  
+
   message="$input"
-  
+
   password="$(perl -pe 'binmode(STDIN, ":bytes"); tr/A-Za-z0-9//dc;' < /dev/urandom | head -c 9; echo)"
-  
+
   data=$(echo "$message" | openssl enc -e -aes-256-cbc -k "$password" -a -md md5)s
-  
+
   note_link=$(curl -s 'https://privnote.com/' \
       -H 'X-Requested-With: XMLHttpRequest' \
       --data-urlencode "data=$data" \
       --data "has_manual_pass=false&duration_hours=0&dont_ask=false&data_type=T&notify_email=&notify_ref=" \
       | jq -r --arg arg "$password" '.note_link + "#" + $arg')
-  
+
   echo "$note_link" | pbcopy
   echo "note URL is $note_link"
 }
 
 # set iterm window title
 function title {
-    echo -ne "\033]0;"$*"\007"
+    echo -ne "\033]0;$*\007"
 }
 
 aws-profile() {
   local profiles=($(cat ~/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort))
 
   if [ -z "$1" ];  then
-      echo "Pass profile name as an argument. Mayhaps one of these?"
-      echo
-      printf '%s\n' "${profiles[@]}"
+    title ""
+    export AWS_PROFILE=""
+    echo AWS Profile cleared
   elif [[ ! " ${profiles[@]} " =~ " ${1} " ]]; then
-      echo "No such profile in ~/.aws/profile. Mayhaps one of these?"
-      echo
-      printf '%s\n' "${profiles[@]}"
+    echo "No such profile in ~/.aws/profile. Mayhaps one of these?"
+    echo
+    printf '%s\n' "${profiles[@]}"
   else
     title "AWS PROFILE : $@"
     export AWS_PROFILE="$1"

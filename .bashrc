@@ -25,5 +25,6 @@ fi
 # fuzzyfinder shortcuts
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# git autocompletion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# autocompletion
+#OLD autocomplete for old bash I think# [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
