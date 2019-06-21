@@ -20,6 +20,3 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 
 # dot setup / git syncing
 alias dot_git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
-
-# cat with wings
-alias cat=bat
