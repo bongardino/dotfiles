@@ -1,5 +1,5 @@
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_prompt,exports,aliases,functions,bashrc.local}; do
+for file in ~/.{bash_prompt,exports,aliases,functions}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
@@ -28,4 +28,3 @@ fi
 # autocompletion
 export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-

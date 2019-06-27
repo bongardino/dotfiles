@@ -36,10 +36,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 # homebrew yelled at me and demanded this
 export PATH="/usr/local/sbin:$PATH"
 
-# Required by Go
+# OKGO
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-
-# Add `~/.bin` to the `$PATH` (required by Go)
-# export PATH="$HOME/.bin:$PATH"

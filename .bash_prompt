@@ -60,14 +60,6 @@ __powerline() {
         printf " $ref$marks"
     }
 
-    # __aws_profile() { 
-    #     # get aws profile
-    #     local profile=$(env | grep AWS_PROFILE | sed -n 's/^AWS_PROFILE=//p')
-
-    #     if [ ! -z "$profile" ]; then
-    #         local aws_profile=
-    # }
-
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
@@ -77,17 +69,7 @@ __powerline() {
             local symbol="$COLOR_FAILURE $PS_SYMBOL $RESET"
         fi
 
-        # local time="$(date "+ %H %M %S")"
-        # local hour="$(time | awk '{print $1 }')"
-        # local min="$time" | awk '{print $2 }'
-        # local sec="$time" | awk '{print $3 }'
-
-        # local time_stamp="[$COLOR_CWD\t$RESET]"
-
-
         local cwd="$COLOR_CWD\w$RESET"
-        # local time="[$COLOR_CWD\t$RESET]"
-        # local time="[$COLOR_CWD`date "+%H"`$RESET:$COLOR_CWD`date "+%M"`$RESET:$COLOR_CWD`date "+%S"`$RESET]"
         # Bash by default expands the content of PS1 unless promptvars is disabled.
         # We must use another layer of reference to prevent expanding any user
         # provided strings, which would cause security issues.
@@ -101,7 +83,6 @@ __powerline() {
             local git="$COLOR_GIT$(__git_info)$RESET"
         fi
 
-        # PS1="\n$time $cwd$git\n$symbol"
         PS1="\n$cwd$git\n$symbol"
     }
 
