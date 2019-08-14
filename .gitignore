@@ -12,5 +12,6 @@
 !.gitignore_global
 !.hushlogin
 !.inputrc
+!.iterm_vars
 !.lesshst
 !.vimrc
