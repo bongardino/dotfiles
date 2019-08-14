@@ -36,5 +36,3 @@ fi
 if [ $TERM_PROGRAM=='iTerm.app' ] && [ -f ~/.iterm_vars ]; then
   source ~/.iterm_vars
 fi
-
-source "$HOME/.bootstrap/env.sh"
