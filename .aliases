@@ -20,3 +20,12 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 
 # dot setup / git syncing
 alias dot_git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
+
+# bundle exec is for a younger me
+alias be='bundle exec'
+
+# colorize our cat
+alias cat='ccat'
+
+# i use this a lot
+alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setairportpower en0 on'

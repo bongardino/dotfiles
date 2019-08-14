@@ -49,19 +49,19 @@ function title {
     echo -ne "\033]0;$*\007"
 }
 
+# aws-profile setter w autocomplete
+[ -e "$HOME/.aws/config" ] && complete -o "default" -o "nospace" -W "$(cat $HOME/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort)" aws-profile
 aws-profile() {
-  local profiles=($(cat ~/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort))
+  local profiles=($(cat $HOME/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort))
 
   if [ -z "$1" ];  then
-    title ""
-    export AWS_PROFILE=""
+    unset AWS_PROFILE
     echo AWS Profile cleared
   elif [[ ! " ${profiles[@]} " =~ " ${1} " ]]; then
     echo "No such profile in ~/.aws/profile. Mayhaps one of these?"
     echo
     printf '%s\n' "${profiles[@]}"
   else
-    title "AWS PROFILE : $@"
     export AWS_PROFILE="$1"
     echo AWS Profile set to "$1"
   fi
