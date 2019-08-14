@@ -55,7 +55,9 @@ aws-profile() {
   local profiles=($(cat $HOME/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort))
 
   if [ -z "$1" ];  then
-    unset AWS_PROFILE
+    while read var; do unset $var; done < <(env | grep AWS | cut -d'=' -f1-1)
+    unset WORLD
+    unset ACCOUNT_NAME
     echo AWS Profile cleared
   elif [[ ! " ${profiles[@]} " =~ " ${1} " ]]; then
     echo "No such profile in ~/.aws/profile. Mayhaps one of these?"

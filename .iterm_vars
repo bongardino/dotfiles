@@ -33,7 +33,7 @@ function tf_version() {
 function iterm2_print_user_vars() {
   iterm2_set_user_var terraformVersion "$(tf_version)"
   iterm2_set_user_var rubyVersion "$(ruby_version)"
-  iterm2_set_user_var awsProfile "$AWS_PROFILE"
+  iterm2_set_user_var awsProfile "${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"
 }
 
 PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'iterm2_print_user_vars'
