@@ -1,5 +1,5 @@
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_prompt,exports,aliases,functions}; do
+for file in ~/.{bash_prompt,exports,aliases,functions,iterm_vars}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
@@ -20,19 +20,16 @@ complete -W "NSGlobalDomain" defaults
 # Add tab completion for `aws` if installed
 type aws &> /dev/null && complete -C "$(which aws_completer)" aws
 
-# fuzzyfinder shortcuts
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# autocompletion
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+# If possible, add tab completion for many more commands
+brewery=$(brew --prefix)
+[[ -s $brewery/etc/profile.d/bash_completion.sh ]] && source $brewery/etc/profile.d/bash_completion.sh
+[[ -s $brewery/opt/fzf/shell/completion.bash ]] && source $brewery/opt/fzf/shell/completion.bash
+[[ -s $brewery/opt/fzf/shell/key-bindings.bash ]] && source $brewery/opt/fzf/shell/key-bindings.bash
 
 # ~/.bashrc.local can be used for other settings you don’t want to commit.
 if [ -f ~/.bashrc.local ]; then
   source ~/.bashrc.local
 fi
 
-# variables for the iterm2 component statusbar. requires nightly and stuff.
-if [ $TERM_PROGRAM=='iTerm.app' ] && [ -f ~/.iterm_vars ]; then
-  source ~/.iterm_vars
-fi
+# are you happy now?
+source "$HOME/.bootstrap/env.sh"

@@ -1,4 +1,3 @@
-#!/bin/bash
 # https://www.nicksays.co.uk/iterm-tool-versions-status-bar/
 
 function iterm2_begin_osc {
