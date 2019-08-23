@@ -1,0 +1,45 @@
+# https://www.nicksays.co.uk/iterm-tool-versions-status-bar/
+
+# set iterm window title
+title (){
+    echo -ne "\033]0;$*\007"
+}
+
+_iterm2_begin_osc() {
+  printf "\033]"
+}
+
+_iterm2_end_osc() {
+  printf "\007"
+}
+
+# Usage: iterm2_set_user_var key value
+_iterm2_set_user_var() {
+  _iterm2_begin_osc
+  printf "1337;SetUserVar=%s=%s" "$1" $(printf "%s" "$2" | base64 | tr -d '\n')
+  _iterm2_end_osc
+}
+
+_ruby_version() {
+  hash rbenv 2>/dev/null || return
+  local ruby_version="$(rbenv version | awk '{ print $1 }')"
+
+  echo "$ruby_version"
+}
+
+_tf_version() {
+  hash tfenv 2>/dev/null || return
+  local tf_version="$(tfenv list | grep '*' | awk '{ print $2 }')"
+
+  echo "$tf_version"
+}
+
+_iterm2_print_user_vars() {
+  _iterm2_set_user_var terraformVersion "$(_tf_version)"
+  _iterm2_set_user_var rubyVersion "$(_ruby_version)"
+  _iterm2_set_user_var awsProfile "${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"
+}
+
+# appended with & to execute as a background task and
+# wrapped in a subshell to avoid the 'Done' message from bash background tasks
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'(_iterm2_print_user_vars &)'

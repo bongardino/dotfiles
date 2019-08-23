@@ -1,10 +1,10 @@
 # print all the 256 colors supported by terminal
-function allthecolors() {
+allthecolors() {
   x=$(tput op) y=$(printf %$((${COLUMNS}-6))s);for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} $(tput setaf $i;tput setab $i)${y// /=}$x;done;
 }
 
 # Decode \x{ABCD}-style Unicode escape sequences
-function unidecode() {
+unidecode() {
   perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
   # print a newline unless we’re piping the output to another program
   if [ -t 1 ]; then
@@ -12,7 +12,7 @@ function unidecode() {
   fi
 }
 
-function retry()
+retry()
 {
     let backoff=1
     false
@@ -22,7 +22,7 @@ function retry()
 }
 
 # privnote cli
-function privnote() {
+privnote() {
   echo "input semi secret"
   read -r input
 
@@ -42,12 +42,7 @@ function privnote() {
   echo "note URL is $note_link"
 }
 
-# set iterm window title
-function title {
-    echo -ne "\033]0;$*\007"
-}
-
-function dot_edit () {
+dot_edit () {
   pushd "$HOME" > /dev/null
   if [ -e ".gitignore" ]; then
     cat .gitignore | grep -F . | tr -d ! | xargs -I {} subl {}

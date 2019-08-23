@@ -1,5 +1,5 @@
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_prompt,exports,aliases,functions,iterm_vars}; do
+for file in ~/.{bash_prompt,exports,aliases,functions,iterm2}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
@@ -24,7 +24,9 @@ type aws &> /dev/null && complete -C "$(which aws_completer)" aws
 brewery=$(brew --prefix)
 [[ -s $brewery/etc/profile.d/bash_completion.sh ]] && source $brewery/etc/profile.d/bash_completion.sh
 [[ -s $brewery/opt/fzf/shell/completion.bash ]] && source $brewery/opt/fzf/shell/completion.bash
+[[ -s $brewery/etc/bash_completion.d/git-completion.bash ]] && source $brewery/etc/bash_completion.d/git-completion.bash
 [[ -s $brewery/opt/fzf/shell/key-bindings.bash ]] && source $brewery/opt/fzf/shell/key-bindings.bash
+
 
 # ~/.bashrc.local can be used for other settings you don’t want to commit.
 if [ -f ~/.bashrc.local ]; then
