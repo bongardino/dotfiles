@@ -1,9 +1,3 @@
-TODO :
-- [x] Move repo out of home dir to src
-- [x] come up w a more clever alias name
-- [x] build into warm welcome
-- [ ] fix that terrible bash script
-
 [Source](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/ "Permalink to The best way to store your dotfiles: A bare Git repo")
 
 > No extra tooling, no symlinks, files are tracked on a version control system, you can use different branches for different computers, you can replicate you configuration easily on new installation.
@@ -97,13 +91,15 @@ For completeness this is what I ended up with for OS X
 # this is terrible and not safe dont use it I was up late
 
 bakup_dir="$HOME"/Desktop/dot-backup
+git_dir="$HOME"/src/dotfiles
 dots=$(curl https://raw.githubusercontent.com/bongardino/dotfiles/master/.gitignore)
 
 function dot_git {
-   /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree="$HOME" "$@"
+   /usr/bin/git --git-dir="$git_dir" --work-tree="$HOME" "$@"
 }
 
-git clone --bare https://github.com/bongardino/dotfiles.git "$HOME"/src/dotfiles
+git init --bare "$git_dir"
+git clone --bare https://github.com/bongardino/dotfiles.git "$git_dir"
 
 mkdir -p "$bakup_dir"
 
