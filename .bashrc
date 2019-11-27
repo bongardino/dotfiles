@@ -23,8 +23,8 @@ type aws &> /dev/null && complete -C "$(which aws_completer)" aws
 # If possible, add tab completion for many more commands
 brewery=$(brew --prefix)
 [[ -s $brewery/etc/profile.d/bash_completion.sh ]] && source $brewery/etc/profile.d/bash_completion.sh
-[[ -s $brewery/opt/fzf/shell/completion.bash ]] && source $brewery/opt/fzf/shell/completion.bash
 [[ -s $brewery/etc/bash_completion.d/git-completion.bash ]] && source $brewery/etc/bash_completion.d/git-completion.bash
+[[ -s $brewery/opt/fzf/shell/completion.bash ]] && source $brewery/opt/fzf/shell/completion.bash
 [[ -s $brewery/opt/fzf/shell/key-bindings.bash ]] && source $brewery/opt/fzf/shell/key-bindings.bash
 
 

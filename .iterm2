@@ -20,23 +20,9 @@ _iterm2_set_user_var() {
   _iterm2_end_osc
 }
 
-_ruby_version() {
-  hash rbenv 2>/dev/null || return
-  local ruby_version="$(rbenv version | awk '{ print $1 }')"
-
-  echo "$ruby_version"
-}
-
-_tf_version() {
-  hash tfenv 2>/dev/null || return
-  local tf_version="$(tfenv list | grep '*' | awk '{ print $2 }')"
-
-  echo "$tf_version"
-}
-
 _iterm2_print_user_vars() {
-  _iterm2_set_user_var terraformVersion "$(_tf_version)"
-  _iterm2_set_user_var rubyVersion "$(_ruby_version)"
+  _iterm2_set_user_var terraformVersion "$(tfenv version-name)"
+  _iterm2_set_user_var rubyVersion "$(rbenv version-name)"
   _iterm2_set_user_var awsProfile "${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"
 }
 

@@ -14,7 +14,7 @@ unidecode() {
 
 retry()
 {
-    let backoff=1
+    let backoff=5
     false
     while [[ $? -ne 0 && $? -ne 130 ]]; do
         "$@" || (sleep $((backoff*=2));false)
