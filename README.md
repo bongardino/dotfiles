@@ -96,24 +96,23 @@ For completeness this is what I ended up with for OS X
 #!/bin/bash
 # this is terrible and not safe dont use it I was up late
 
-git clone --bare https://github.com/bongardino/dotfiles.git "$HOME"/src/dotfiles
+bakup_dir="$HOME"/Desktop/dot-backup
+dots=$(curl https://raw.githubusercontent.com/bongardino/dotfiles/master/.gitignore)
 
 function dot_git {
-   /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree="$HOME" $@
+   /usr/bin/git --git-dir="$HOME"/src/dotfiles/ --work-tree="$HOME" "$@"
 }
 
-if [ ! -d "$DIRECTORY" ]; then
-	mkdir -p "$HOME"/Desktop/config-backup
-fi
+git clone --bare https://github.com/bongardino/dotfiles.git "$HOME"/src/dotfiles
 
-dot_git checkout
+mkdir -p "$bakup_dir"
 
-if [ $? = 0 ]; then
-  echo "Checked out dots.";
-  else
-    echo "Backing up pre-existing dot files.";
-    dot_git checkout 2>&1 | egrep "[.]+[a-z]" | awk {'print $1'} | xargs -I{} mv {} "$HOME"/Desktop/config-backup/
-fi;
+for dots in "${dots[@]}"
+do
+   : 
+   file=$(echo "$dot" | cut -c2-)
+   mv "$HOME/$file" "$backup_dir" || true
+done
 
 dot_git checkout
 dot_git config status.showUntrackedFiles no
