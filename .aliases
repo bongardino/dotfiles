@@ -29,6 +29,3 @@ alias cat='ccat'
 
 # i use this a lot
 alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setairportpower en0 on'
-
-# no fun allowed
-alias no-kicks="gsed -i 's/👠 - //g' ~/.bootstrap/resources/env.d/aws-okta-up.sh"
