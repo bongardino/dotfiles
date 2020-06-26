@@ -19,7 +19,7 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # dot setup / git syncing
-alias dot_git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
+alias dot-git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
 
 # bundle exec is for a younger me
 alias be='bundle exec'
@@ -29,3 +29,7 @@ alias cat='ccat'
 
 # i use this a lot
 alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setairportpower en0 on'
+
+# lazy maybe
+alias easyssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias easypush='git push --set-upstream origin $(git symbolic-ref --short HEAD)'

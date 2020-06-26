@@ -38,3 +38,6 @@ export PATH="/usr/local/sbin:$PATH"
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+# bash-completion@2
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"

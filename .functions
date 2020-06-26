@@ -1,3 +1,5 @@
+#!/usr/local/bin/bash
+
 # print all the 256 colors supported by terminal
 allthecolors() {
   x=$(tput op) y=$(printf %$((${COLUMNS}-6))s);for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} $(tput setaf $i;tput setab $i)${y// /=}$x;done;
@@ -25,24 +27,20 @@ retry()
 privnote() {
   echo "input semi secret"
   read -r input
-
   local message="$input"
-
-  local password="$(perl -pe 'binmode(STDIN, ":bytes"); tr/A-Za-z0-9//dc;' < /dev/urandom | head -c 9; echo)"
-
+  local password="$(perl -pe 'binmode(STDIN, ":bytes"); tr/A-Za-z0-9//dc;' < /dev/urandom | head -c 9; echo)" # a password is required.
+                                                                                                              # randomly generate one in a format privote accepts
   local data=$(echo "$message" | openssl enc -e -aes-256-cbc -k "$password" -a -md md5)s
-
   local note_link=$(curl -s 'https://privnote.com/' \
                     -H 'X-Requested-With: XMLHttpRequest' \
                     --data-urlencode "data=$data" \
                     --data "has_manual_pass=false&duration_hours=0&dont_ask=false&data_type=T&notify_email=&notify_ref=" \
                     | jq -r --arg arg "$password" '.note_link + "#" + $arg')
-
   echo "$note_link" | pbcopy
   echo "note URL is $note_link"
 }
 
-dot_edit () {
+dot-edit () {
   pushd "$HOME" > /dev/null
   if [ -e ".gitignore" ]; then
     cat .gitignore | grep -F . | tr -d ! | xargs -I {} subl {}
@@ -50,29 +48,4 @@ dot_edit () {
     echo "dotfile .gitignore not found"
   fi
   popd > /dev/null
-}
-
-# aws-profile setter w autocomplete
-aws_profiles="$(cat $HOME/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort)"
-[ -e "$HOME/.aws/config" ] && complete -o "default" -o "nospace" -W "$aws_profiles logout" aws-profile
-aws-profile() {
-  local profiles=($aws_profiles)
-
-  _clear() {
-    while read var; do unset $var; done < <(env | grep AWS | cut -d'=' -f1-1)
-    unset WORLD
-    unset ACCOUNT_NAME
-  }
-
-  if [ "$1" == 'logout' ];  then
-    _clear && echo AWS Profile cleared
-  elif [[ ! " ${profiles[@]} " =~ " ${1} " ]]; then
-    echo "No such profile in ~/.aws/profile. Mayhaps one of these?"
-    echo
-    printf '%s\n' "${profiles[@]}"
-  else
-    _clear
-    export AWS_PROFILE="$1"
-    echo AWS Profile set to "$1"
-  fi
 }
