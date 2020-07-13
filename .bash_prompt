@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 ## Uncomment to disable git info
 #POWERLINE_GIT=0

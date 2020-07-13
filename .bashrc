@@ -1,5 +1,5 @@
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_prompt,exports,aliases,functions,iterm2}; do
+for file in $HOME/.{bash_prompt,exports,aliases,functions,iterm2}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
@@ -24,8 +24,8 @@ brewery=$(brew --prefix)
 [[ -s $brewery/opt/fzf/shell/key-bindings.bash ]] && source $brewery/opt/fzf/shell/key-bindings.bash
 
 # ~/.bashrc.local can be used for other settings you don’t want to commit.
-if [ -f ~/.bashrc.local ]; then
-  source ~/.bashrc.local
+if [ -f $HOME/.bashrc.local ]; then
+  source $HOME/.bashrc.local
 fi
 
 # are you happy now?
