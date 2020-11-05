@@ -1,9 +1,3 @@
-#!/bin/bash
-
-#VPN via CLI, stolen from corey
-#https://gist.github.com/coreyja/8333db604b1532dd6c5c2c642daaa721
-alias push="osascript ~/src/applescripts/autopush.applescript"
-
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
@@ -30,9 +24,14 @@ alias kube='kubectl'
 # colorize our cat
 alias cat='ccat'
 
-# i use this a lot
+# shortcuts to the system
 alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setairportpower en0 on'
+alias phones="SwitchAudioSource -s 'FiiO USB DAC-E10'"
+alias speaks="SwitchAudioSource -s 'AudioQuest DragonFly Black v1.5'"
 
 # lazy maybe
 alias lazyssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias lazypush='git push --set-upstream origin $(git symbolic-ref --short HEAD)'
+
+# be independent
+alias tf-pushpop='$HOME/src/scratch/bash/tf_pushpop'

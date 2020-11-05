@@ -35,7 +35,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 export PATH="/usr/local/sbin:$PATH"
 
 # OKGO
-export GOPATH="${HOME}/.go"
+export GOPATH="${HOME}/src/go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
