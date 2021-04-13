@@ -46,3 +46,16 @@ dot-edit () {
   fi
   popd > /dev/null
 }
+
+# kubectlgetall -n stage -l app=gifs
+kubectlgetall() {
+  for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+    echo "Resource:" $i
+    kubectl "${@}" get --ignore-not-found ${i}
+  done
+}
+
+# tail -f console.log | highlight ERROR
+highlight () {
+    perl -pe "s/$1/\e[1;31;43m$&\e[0m/g"
+}

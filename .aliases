@@ -19,7 +19,7 @@ alias dot-git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
 alias be='bundle exec'
 
 # who has the time
-alias kube='kubectl'
+alias k='kubectl'
 
 # colorize our cat
 alias cat='ccat'
@@ -29,9 +29,9 @@ alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setair
 alias phones="SwitchAudioSource -s 'FiiO USB DAC-E10'"
 alias speaks="SwitchAudioSource -s 'AudioQuest DragonFly Black v1.5'"
 
-# lazy maybe
-alias lazyssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias lazypush='git push --set-upstream origin $(git symbolic-ref --short HEAD)'
+# goin for it
+alias yolo-ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias yolo-push='git push --set-upstream origin $(git symbolic-ref --short HEAD)'
 
-# be independent
-alias tf-pushpop='$HOME/src/scratch/bash/tf_pushpop'
+# hnnng
+alias yeet="rm -rf"

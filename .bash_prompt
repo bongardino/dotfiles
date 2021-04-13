@@ -63,6 +63,11 @@ __powerline() {
             local symbol="$COLOR_FAILURE $PS_SYMBOL $COLOR_RESET"
         fi
 
+        # I can never get this to work
+        # Force prompt to write history after every command.
+        # http://superuser.com/questions/20900/bash-history-loss
+        # history -a
+
         local cwd="$COLOR_CWD\w$COLOR_RESET"
         # Bash by default expands the content of PS1 unless promptvars is disabled.
         # We must use another layer of reference to prevent expanding any user

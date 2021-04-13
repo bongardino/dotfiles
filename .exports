@@ -1,19 +1,20 @@
 # Make vim the default editor
 export EDITOR="vim"
 
-# Larger bash history (allow 32³ entries; default is 500)
-export HISTSIZE=32768
-export HISTFILESIZE=$HISTSIZE
-
-# Ignore duplicate lines and commands started w space / tab
+# Ignore/erase duplicate lines and ignore commands started w space / tab
 export HISTCONTROL=ignoredups:erasedups
 export HISTCONTROL=ignoreboth
 
-# Add timestamps to history - breaks w/ history appending
-# export HISTTIMEFORMAT="%d.%m %T || "
+# Eternal bash history.
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
 
-# After each command, append to the history file and reread it
-# export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+# export HISTTIMEFORMAT="[%F %T] " # trailing spaces break stuff
+
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
 
 # Prefer US English and use UTF-8
 export LANG="en_US"

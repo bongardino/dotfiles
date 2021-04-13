@@ -5,6 +5,8 @@
 	excludesfile = ~/.gitignore_global
 	hooksPath = ~/.git-templates/hooks
 [init]
-	templatedir = ~/.git-templates
+	templatedir = /Users/mikebongardino/.git-templates
 [pull]
 	rebase = false
+[credential]
+	helper = osxkeychain

@@ -28,5 +28,10 @@ if [ -f $HOME/.bashrc.local ]; then
   source $HOME/.bashrc.local
 fi
 
+# https://github.com/pyenv/pyenv-virtualenv#installing-with-homebrew-for-macos-users
+if type pyenv &> /dev/null; then
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 # are you happy now?
 source "$HOME/.bootstrap/env.sh"
