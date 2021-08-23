@@ -2,32 +2,30 @@
 
 # https://www.nicksays.co.uk/iterm-tool-versions-status-bar/
 
+# sourced in powerline bash prompt
+
 # inlined these iterm2 functions from the iterm shell integrations collection
 # hardcoded begin_osc (\033) and end_osc (\007) values bc the existing
 # implementation wouldn't escape properly
 
-# set iterm window title
-title (){
-  echo -ne "\033]0;$*\007"
+# set window title
+# __iterm2_window_title (){
+#   echo -ne "\033]0;$*\007"
+# }
+
+__iterm2_status_info() {
+    declare -A arr
+        arr[terraformVersion]="$(tfenv version-name 2> /dev/null)"
+        arr[rubyVersion]="$(rbenv version-name 2> /dev/null)"
+        arr[awsProfile]="${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"
+
+      __iterm2_set_user_var () {
+        printf "\033]1337;SetUserVar=%s=%s\007" "$1" $(printf "%s" "$2" | base64 | tr -d '\n')
+      }
+
+      for key in "${!arr[@]}"; do
+        __iterm2_set_user_var "${key}" "${arr[${key}]}"
+      done
+
+  # true #iTerm says this has to return true and produce no other output but that slows it down
 }
-
-__iterm2_print_user_vars() {
-  declare -A arr
-    arr[terraformVersion]="$(tfenv version-name)"
-    arr[rubyVersion]="$(rbenv version-name)"
-    arr[awsProfile]="${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"
-
-  __iterm2_set_user_var () {
-    printf "\033]1337;SetUserVar=%s=%s\007" "$1" $(printf "%s" "$2" | base64 | tr -d '\n')
-  }
-
-  for key in "${!arr[@]}"; do
-      __iterm2_set_user_var "${key}" "${arr[${key}]}"
-  done
-
-  true #iTerm says this has to return true and produce no other output
-}
-
-# appended with & to execute as a background task and
-# wrapped in a subshell to avoid the 'Done' message from bash background tasks
-PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'(__iterm2_print_user_vars &)'

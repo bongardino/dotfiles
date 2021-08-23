@@ -50,7 +50,7 @@ dot-edit () {
 # kubectlgetall -n stage -l app=gifs
 kubectlgetall() {
   for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
-    echo "Resource:" $i
+    printf "\n  Resource:" $i
     kubectl "${@}" get --ignore-not-found ${i}
   done
 }
@@ -58,4 +58,10 @@ kubectlgetall() {
 # tail -f console.log | highlight ERROR
 highlight () {
     perl -pe "s/$1/\e[1;31;43m$&\e[0m/g"
+}
+
+# hammer an endpoint from within the cluster
+# sleep interval, endpoint
+kubepodstress() {
+  kubectl -n demo run -i --tty load-generator-$RANDOM --rm --image=busybox --restart=Never -n demo -- /bin/sh -c "while sleep $1; do wget -q -O- $2; done"
 }

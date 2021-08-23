@@ -10,7 +10,7 @@ export HISTCONTROL=ignoreboth
 export HISTFILESIZE=
 export HISTSIZE=
 
-# export HISTTIMEFORMAT="[%F %T] " # trailing spaces break stuff
+# !!! export HISTTIMEFORMAT="[%F %T] " # trailing spaces break stuff
 
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login

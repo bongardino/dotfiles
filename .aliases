@@ -35,3 +35,5 @@ alias yolo-push='git push --set-upstream origin $(git symbolic-ref --short HEAD)
 
 # hnnng
 alias yeet="rm -rf"
+
+alias count='wc -l'

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 # https://github.com/riobard/bash-powerline
-## Uncomment to disable git info
+## Uncomment to disable git/iterm info
 #POWERLINE_GIT=0
+#ITERM_INFO=0
 
 __powerline() {
     # Colors
@@ -54,6 +55,15 @@ __powerline() {
         printf " $ref$marks"
     }
 
+    __iterm2_info() {
+        [[ $ITERM_INFO = 0 ]] && return
+        [ -r "$HOME/.iterm2" ] && source "$HOME/.iterm2"
+        # appended with & to execute as a background task and
+        # wrapped in a subshell to avoid the 'Done' message
+        # this is probably way unsafe
+        (__iterm2_status_info &)
+    }
+
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
@@ -63,12 +73,9 @@ __powerline() {
             local symbol="$COLOR_FAILURE $PS_SYMBOL $COLOR_RESET"
         fi
 
-        # I can never get this to work
-        # Force prompt to write history after every command.
-        # http://superuser.com/questions/20900/bash-history-loss
-        # history -a
-
         local cwd="$COLOR_CWD\w$COLOR_RESET"
+
+
         # Bash by default expands the content of PS1 unless promptvars is disabled.
         # We must use another layer of reference to prevent expanding any user
         # provided strings, which would cause security issues.
@@ -81,6 +88,8 @@ __powerline() {
             # promptvars is disabled. Avoid creating unnecessary env var.
             local git="$COLOR_GIT$(__git_info)$COLOR_RESET"
         fi
+
+        __iterm2_info
 
         PS1="\n$cwd$git\n$symbol"
     }

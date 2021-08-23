@@ -1,5 +1,5 @@
 # Load the shell dotfiles, and then some:
-for file in $HOME/.{bash_prompt,exports,aliases,functions,iterm2}; do
+for file in $HOME/.{bash_prompt,exports,aliases,functions}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
@@ -8,6 +8,8 @@ unset file
 shopt -s nocaseglob
 
 # Append to the Bash history file, rather than overwriting it
+# this needs some fixing w multiple shells but it isnt making me angry atm
+# https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
 shopt -s histappend
 
 # Autocorrect typos in path names when using `cd`
