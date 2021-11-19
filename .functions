@@ -61,7 +61,7 @@ highlight () {
 }
 
 # hammer an endpoint from within the cluster
-# sleep interval, endpoint
+# namespace, sleep interval, endpoint
 kubepodstress() {
-  kubectl -n demo run -i --tty load-generator-$RANDOM --rm --image=busybox --restart=Never -n demo -- /bin/sh -c "while sleep $1; do wget -q -O- $2; done"
+  kubectl -n $1 run -i --tty load-generator-$RANDOM --rm --image=busybox --restart=Never -n $1 -- /bin/sh -c "while sleep $2; do wget -q -O- $3; done"
 }

@@ -1,5 +1,5 @@
 # Load the shell dotfiles, and then some:
-for file in $HOME/.{bash_prompt,exports,aliases,functions}; do
+for file in $HOME/.{bash_prompt,exports,aliases,functions,iterm2}; do
   [ -r "$file" ] && source "$file"
 done
 unset file
@@ -24,6 +24,9 @@ brewery=$(brew --prefix)
 [[ -s $brewery/etc/profile.d/bash_completion.sh ]] && source $brewery/etc/profile.d/bash_completion.sh
 [[ -s $brewery/opt/fzf/shell/completion.bash ]] && source $brewery/opt/fzf/shell/completion.bash
 [[ -s $brewery/opt/fzf/shell/key-bindings.bash ]] && source $brewery/opt/fzf/shell/key-bindings.bash
+
+# https://github.com/cykerway/complete-alias
+[ -r "$HOME/src/complete-alias/complete_alias" ] && source "$HOME/src/complete-alias/complete_alias"
 
 # ~/.bashrc.local can be used for other settings you don’t want to commit.
 if [ -f $HOME/.bashrc.local ]; then

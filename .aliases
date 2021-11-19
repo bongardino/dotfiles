@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# ALIAS_AUTOCOMPLETE=0
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
@@ -15,15 +19,6 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # dot setup / git syncing
 alias dot-git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
 
-# bundle exec is for a younger me
-alias be='bundle exec'
-
-# who has the time
-alias k='kubectl'
-
-# colorize our cat
-alias cat='ccat'
-
 # shortcuts to the system
 alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setairportpower en0 on'
 alias phones="SwitchAudioSource -s 'FiiO USB DAC-E10'"
@@ -36,4 +31,38 @@ alias yolo-push='git push --set-upstream origin $(git symbolic-ref --short HEAD)
 # hnnng
 alias yeet="rm -rf"
 
+# can never remember the wc l
 alias count='wc -l'
+
+#
+## aliases in the array benefit from auto complete
+declare -A arr
+  # bundle exec is for a younger me
+  arr[be]='bundle exec'
+
+  # colorize our cat
+  arr[cat]='ccat'
+
+  # who has the time
+  arr[k]='kubectl'
+
+  # who has the tiiiime
+  arr[ga]='git add'
+  arr[gb]='git branch'
+  arr[gc]='git commit'
+  arr[gco]='git checkout'
+  arr[gd]='git diff'
+  arr[gpl]='git pull'
+  # arr[gpu]='git push'
+  arr[g]='git'
+  arr[gs]='git status'
+  arr[gst]='git stash'
+
+for i in "${!arr[@]}"; do
+  alias "${i}"="${arr[${i}]}"
+
+  [[ $ALIAS_AUTOCOMPLETE = 0 ]] && return # disabled
+  complete -F _complete_alias "${i}" # https://github.com/cykerway/complete-alias
+done
+
+unset arr

@@ -56,8 +56,7 @@ __powerline() {
     }
 
     __iterm2_info() {
-        [[ $ITERM_INFO = 0 ]] && return
-        [ -r "$HOME/.iterm2" ] && source "$HOME/.iterm2"
+        [[ $ITERM_INFO = 0 ]] && return # disabled
         # appended with & to execute as a background task and
         # wrapped in a subshell to avoid the 'Done' message
         # this is probably way unsafe
