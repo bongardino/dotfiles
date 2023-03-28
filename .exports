@@ -32,13 +32,18 @@ export GREP_OPTIONS="--color=auto"
 # FZF search command
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 
-# homebrew yelled at me and demanded this
-export PATH="/usr/local/sbin:$PATH"
+# deprecated w osx monterey
+# export PATH="/usr/local/sbin:$PATH"
+# export PATH="/usr/local/bin:$PATH"
+
 
 # OKGO
-export GOPATH="${HOME}/src/go"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+# export GOPATH="${HOME}/src/go"
+# export GOROOT="$(brew --prefix golang)/libexec"
+# export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # bash-completion@2
 export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+
+# tfenv on m1; actually maybe don't do this and just rely on rosetta
+# TFENV_ARCH=arm64

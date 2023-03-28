@@ -2,7 +2,7 @@
 	email = bongardino@gmail.com
 	name = Bongardino
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/mikebongardino/.gitignore_global
 	hooksPath = ~/.git-templates/hooks
 [init]
 	templatedir = /Users/mikebongardino/.git-templates
@@ -10,3 +10,5 @@
 	rebase = false
 [credential]
 	helper = osxkeychain
+[push]
+	autoSetupRemote = true

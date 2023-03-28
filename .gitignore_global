@@ -36,5 +36,7 @@
 ehthumbs.db
 Thumbs.db
 
-# Runner #
-kick_out_the_jams.sh
+# I have been burned before
+.env.local
+.env.development
+.env.test

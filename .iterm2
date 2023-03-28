@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # https://www.nicksays.co.uk/iterm-tool-versions-status-bar/
 
@@ -10,17 +10,31 @@
 # https://iterm2.com/documentation-shell-integration.html
 
 # set window title
-# __iterm2_window_title (){
-#   echo -ne "\033]0;$*\007"
-# }
+title (){
+  echo -ne "\033]0;$*\007"
+}
 
 # set cursor color
 # https://groups.google.com/g/iterm2-discuss/c/z-kH3NgBzTU/m/1TDni-sF8NcJ
 # make the cursor light blue (rgb 4040ff):
 # echo -e "\033]Pl4040ff\033\\"
 
+__kube_context(){
+  ! command -v kubectl >/dev/null 2>&1 && return # kubectl not installed
+  context=$(kubectl config current-context 2>&1)
+  if [[ "$context" == 'error: current-context is not set' ]]; then
+    return
+  elif [[ "$context" == 'docker-desktop' ]]; then
+    return
+  else
+    echo "$context"
+  fi
+}
+
+
 __iterm2_status_info() {
   declare -A arr
+  arr[kubectlContext]="$(__kube_context)"
   arr[terraformVersion]="$(tfenv version-name 2> /dev/null)"
   arr[rubyVersion]="$(rbenv version-name 2> /dev/null)"
   arr[awsProfile]="${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"

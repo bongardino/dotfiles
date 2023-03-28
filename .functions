@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # print all the 256 colors supported by terminal
 allthecolors() {
   x=$(tput op) y=$(printf %$((${COLUMNS}-6))s);for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} $(tput setaf $i;tput setab $i)${y// /=}$x;done;
@@ -25,8 +27,8 @@ privnote() {
   echo "input semi secret"
   read -r input
   local message="$input"
-  local password="$(perl -pe 'binmode(STDIN, ":bytes"); tr/A-Za-z0-9//dc;' < /dev/urandom | head -c 9; echo)" # a password is required.
-                                                                                                              # randomly generate one in a format privote accepts
+  # a password is required, so randomly generate one in a format privote accepts
+  local password="$(perl -pe 'binmode(STDIN, ":bytes"); tr/A-Za-z0-9//dc;' < /dev/urandom | head -c 9; echo)"
   local data=$(echo "$message" | openssl enc -e -aes-256-cbc -k "$password" -a -md md5)s
   local note_link=$(curl -s 'https://privnote.com/' \
                     -H 'X-Requested-With: XMLHttpRequest' \
@@ -64,4 +66,8 @@ highlight () {
 # namespace, sleep interval, endpoint
 kubepodstress() {
   kubectl -n $1 run -i --tty load-generator-$RANDOM --rm --image=busybox --restart=Never -n $1 -- /bin/sh -c "while sleep $2; do wget -q -O- $3; done"
+}
+
+multikill () {
+    ps -ef | grep -m 1 "$1" | awk '{ print $2 }' | xargs kill -9
 }

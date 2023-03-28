@@ -1,6 +1,4 @@
-#!/bin/bash
-
-# ALIAS_AUTOCOMPLETE=0
+#!/usr/bin/env bash
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -21,8 +19,7 @@ alias dot-git='/usr/bin/git --git-dir=$HOME/src/dotfiles --work-tree=$HOME'
 
 # shortcuts to the system
 alias wifi='networksetup -setairportpower en0 off; sleep 3; networksetup -setairportpower en0 on'
-alias phones="SwitchAudioSource -s 'FiiO USB DAC-E10'"
-alias speaks="SwitchAudioSource -s 'AudioQuest DragonFly Black v1.5'"
+alias sound='sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod'
 
 # goin for it
 alias yolo-ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
@@ -58,10 +55,11 @@ declare -A arr
   arr[gs]='git status'
   arr[gst]='git stash'
 
+  # I don't feel like fixing nodenv path problems today
+  arr[tsc]='npx tsc'
 for i in "${!arr[@]}"; do
   alias "${i}"="${arr[${i}]}"
 
-  [[ $ALIAS_AUTOCOMPLETE = 0 ]] && return # disabled
   complete -F _complete_alias "${i}" # https://github.com/cykerway/complete-alias
 done
 
