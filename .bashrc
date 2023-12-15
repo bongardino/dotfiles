@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Load the shell dotfiles, and then some:
@@ -46,15 +48,11 @@ fi
 #   eval "$(pyenv virtualenv-init -)"
 # fi
 
-# are you happy now?
-if [ -f $HOME/.bootstrap/env.sh ]; then
-  source $HOME/.bootstrap/env.sh
-fi
-
 export LDFLAGS="-L$(brew --prefix)/opt/libffi/lib"
-
 export CPPFLAGS="-I$(brew --prefix)/opt/libffi/include"
-
 export PKG_CONFIG_PATH="$(brew --prefix)/opt/libffi/lib/pkgconfig"
+export PATH="/opt/homebrew/bin:$PATH"
 
+# are you happy now?
+eval "$(direnv hook bash)"
 source "$HOME/.bootstrap/env.sh"

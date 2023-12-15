@@ -46,6 +46,12 @@ dot-edit () {
   else
     echo "dotfile .gitignore not found"
   fi
+
+  if [ -e ".bashrc.local" ]; then
+    subl .bashrc.local
+  else
+    echo "local .bashrc not found"
+  fi
   popd > /dev/null
 }
 
@@ -69,5 +75,11 @@ kubepodstress() {
 }
 
 multikill () {
-    ps -ef | grep -m 1 "$1" | awk '{ print $2 }' | xargs kill -9
+  ps -ef | grep -m 1 "$1" | awk '{ print $2 }' | xargs kill -9
+}
+
+aws-shell () {
+  saml2aws login -a "$1"
+  # subscript required to isolate env var and silence declarations
+  saml2aws exec -a "$1" -- bash "${HOME}/.aws_shell.sh" "$1"
 }

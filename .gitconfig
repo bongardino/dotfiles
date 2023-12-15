@@ -6,6 +6,7 @@
 	hooksPath = ~/.git-templates/hooks
 [init]
 	templatedir = /Users/mikebongardino/.git-templates
+	defaultBranch = main
 [pull]
 	rebase = false
 [credential]

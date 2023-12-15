@@ -47,3 +47,6 @@ export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 
 # tfenv on m1; actually maybe don't do this and just rely on rosetta
 # TFENV_ARCH=arm64
+
+# KREW?
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

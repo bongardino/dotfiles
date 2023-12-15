@@ -31,21 +31,21 @@ __kube_context(){
   fi
 }
 
-
 __iterm2_status_info() {
   declare -A arr
   arr[kubectlContext]="$(__kube_context)"
   arr[terraformVersion]="$(tfenv version-name 2> /dev/null)"
   arr[rubyVersion]="$(rbenv version-name 2> /dev/null)"
-  arr[awsProfile]="${AWS_PROFILE:-$AWS_OKTA_PROFILE_NAME}"
+  arr[awsProfile]="${AWS_PROFILE}"
 
   __iterm2_set_user_var () {
-    printf "\033]1337;SetUserVar=%s=%s\007" "$1" $(printf "%s" "$2" | base64 | tr -d '\n')
+    printf "\033]1337;SetUserVar=%s=%s\007" "$1" "$(printf "%s" "$2" | base64 | tr -d '\n')"
   }
 
   for i in "${!arr[@]}"; do
     __iterm2_set_user_var "${i}" "${arr[${i}]}"
   done
 
-  # true #iTerm says this has to return true and produce no other output but that slows it down
+  # iTerm says this has to return true and produce no other output but that slows it down
+  # true
 }
