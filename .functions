@@ -5,6 +5,27 @@ allthecolors() {
   x=$(tput op) y=$(printf %$((${COLUMNS}-6))s);for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} $(tput setaf $i;tput setab $i)${y// /=}$x;done;
 }
 
+urlencode() {
+    local string="${1}"
+    local strlen=${#string}
+    local encoded=""
+    local pos c o
+
+    for (( pos=0 ; pos<strlen ; pos++ )); do
+        c=${string:$pos:1}
+        case "$c" in
+            [a-zA-Z0-9.~_-]) 
+                o="${c}"
+                ;;
+            *)
+                printf -v o '%%%02x' "'$c"
+                ;;
+        esac
+        encoded+="${o}"
+    done
+    echo "${encoded}"
+}
+
 # Decode \x{ABCD}-style Unicode escape sequences
 unidecode() {
   perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
@@ -42,13 +63,29 @@ privnote() {
 dot-edit () {
   pushd "$HOME" > /dev/null
   if [ -e ".gitignore" ]; then
-    cat .gitignore | grep -F . | tr -d ! | xargs -I {} subl {}
+    cat .gitignore | grep -F . | tr -d ! | xargs -I {} code {}
   else
     echo "dotfile .gitignore not found"
   fi
 
   if [ -e ".bashrc.local" ]; then
-    subl .bashrc.local
+    code .bashrc.local
+  else
+    echo "local .bashrc not found"
+  fi
+  popd > /dev/null
+}
+
+dot-copy () {
+  pushd "$HOME" > /dev/null
+  if [ -e ".gitignore" ]; then
+    cat .gitignore | grep -F . | tr -d ! | xargs -I {} cp {} "$HOME/Desktop/dots"
+  else
+    echo "dotfile .gitignore not found"
+  fi
+
+  if [ -e ".bashrc.local" ]; then
+    code .bashrc.local
   else
     echo "local .bashrc not found"
   fi
@@ -58,8 +95,9 @@ dot-edit () {
 # kubectlgetall -n stage -l app=gifs
 kubectlgetall() {
   for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
-    printf "\n  Resource:" $i
-    kubectl "${@}" get --ignore-not-found ${i}
+    printf "\n %string" "$i"
+    printf "\n"
+    kubectl "${@}" get --ignore-not-found "${i}"
   done
 }
 

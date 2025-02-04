@@ -38,9 +38,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
 
 
 # OKGO
-# export GOPATH="${HOME}/src/go"
-# export GOROOT="$(brew --prefix golang)/libexec"
-# export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH=$PATH:$HOME/go/bin
 
 # bash-completion@2
 export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
